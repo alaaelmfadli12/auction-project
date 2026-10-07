@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * @author David J. Barnes and Michael Kölling.
  * @version 7.0
  */
+//question 1 was just insepcting and testing, no answers required
+//questions 4-5 dont exist? jumps straight to 6
 public class Auction
 {
     // The list of Lots in this auction.
@@ -55,8 +57,8 @@ public class Auction
     {
         Lot selectedLot = getLot(lotNumber);
         if(selectedLot != null) {
-            Bid aBid = new Bid(bidder, value);
-            boolean successful = selectedLot.bidFor(aBid);
+            // question 2
+            boolean successful = selectedLot.bidFor(new Bid(bidder, value));
             if(successful) {
                 System.out.println("The bid for lot number " +
                                    lotNumber + " was successful.");
@@ -99,6 +101,32 @@ public class Auction
                                " does not exist.");
             return null;
         }
+    }
+    
+    //question 3
+    public void close() {
+        for (Lot aLot : listOfLots) {
+            Bid highest = aLot.getHighestBid();
+            if (highest == null) {
+                System.out.println("No bidder for this lot");
+            }
+            else {
+                System.out.println("The bidder is " + highest.getBidder().getName());
+                System.out.println("The value is " + highest.getValue());
+        }
+        }
+    }
+    
+    //question 6
+    public ArrayList<Lot> getUnsold() {
+        ArrayList<Lot> unsold = new ArrayList<>();
+        for (Lot aLot : listOfLots) {
+            Bid highest = aLot.getHighestBid();
+            if (highest == null) {
+                unsold.add(aLot);
+            }
+        }
+        return unsold;
     }
 }
 
